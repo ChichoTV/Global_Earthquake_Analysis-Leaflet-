@@ -1,16 +1,59 @@
-var myMap = L.map("map", {
-    center: [40.7, -73.95],
-    zoom: 3
-  });
-  
-  L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+
+  var tile=L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}", {
     attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
     tileSize: 512,
     maxZoom: 18,
     zoomOffset: -1,
     id: "mapbox/streets-v11",
     accessToken: API_KEY
-  }).addTo(myMap);
+  });
+
+  var layers = {
+    "-10-10": new L.LayerGroup(),
+    "10-30": new L.LayerGroup(),
+    "30-50": new L.LayerGroup(),
+    "50-70": new L.LayerGroup(),
+    "70-90": new L.LayerGroup(),
+    "90+": new L.LayerGroup()
+  };
+
+  var info = L.control({
+    position: "bottomright"
+  });
+
+  var myMap = L.map("map", {
+    center: [40.7, -73.95],
+    zoom: 3,
+    layers:[
+      layers['-10-10'],
+      layers['10-30'],
+      layers["30-50"],
+      layers["50-70"],
+      layers["70-90"],
+      layers["90+"]
+    ]
+  });
+  // var overlays = {
+  //   "-10-10": layers['-10-10'],
+  //   "10-30": layers['10-30'],
+  //   "30-50": layers["30-50"],
+  //   "50-70": layers["50-70"],
+  //   "70-90": layers["70-90"],
+  //   "90+":layers["90+"]
+  // };
+
+  // L.control.layers(null, overlays).addTo(myMap);
+ 
+
+  info.onAdd = function() {
+    var div = L.DomUtil.create("div", "legend");
+    return div;
+  };
+
+  info.addTo(myMap);
+  tile.addTo(myMap);
+
+  document.querySelector(".legend").innerHTML=('<h4>Legend</h4> <i style="background: Green"></i><span>-10-10</span>')
 
   var url='https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson'
 
