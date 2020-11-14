@@ -8,15 +8,6 @@
     accessToken: API_KEY
   });
 
-  var layers = {
-    "-10-10": new L.LayerGroup(),
-    "10-30": new L.LayerGroup(),
-    "30-50": new L.LayerGroup(),
-    "50-70": new L.LayerGroup(),
-    "70-90": new L.LayerGroup(),
-    "90+": new L.LayerGroup()
-  };
-
   var info = L.control({
     position: "bottomright"
   });
@@ -24,25 +15,7 @@
   var myMap = L.map("map", {
     center: [40.7, -73.95],
     zoom: 3,
-    layers:[
-      layers['-10-10'],
-      layers['10-30'],
-      layers["30-50"],
-      layers["50-70"],
-      layers["70-90"],
-      layers["90+"]
-    ]
   });
-  // var overlays = {
-  //   "-10-10": layers['-10-10'],
-  //   "10-30": layers['10-30'],
-  //   "30-50": layers["30-50"],
-  //   "50-70": layers["50-70"],
-  //   "70-90": layers["70-90"],
-  //   "90+":layers["90+"]
-  // };
-
-  // L.control.layers(null, overlays).addTo(myMap);
  
 
   info.onAdd = function() {
@@ -53,7 +26,7 @@
   info.addTo(myMap);
   tile.addTo(myMap);
 
-  document.querySelector(".legend").innerHTML=('<h4>Legend</h4> <i style="background: Green"></i><span>-10-10</span>')
+  document.querySelector(".legend").innerHTML=('<h4>Depth</h4> <i style="background: Green"></i><span>-10-10</span><br><i style="background: LawnGreen"></i><span>10-30</span><br><i style="background: GreenYellow"></i><span>30-50</span><br><i style="background: #F0E68C"></i><span>50-70</span><br><i style="background: Yellow"></i><span>70-90</span><br><i style="background: GoldenRod"></i><span>90+</span><br>')
 
   var url='https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson'
 
