@@ -1,2 +1,2 @@
 // API key
-const API_KEY = "pk.eyJ1IjoiY2hpY2hvMTIzIiwiYSI6ImNrZ3FxMzE3bDB0MHYycXFpdHNhNnVmYjEifQ.WV53FHDNDQTxueQqEWPIbw";
+const API_KEY = "redacted";
